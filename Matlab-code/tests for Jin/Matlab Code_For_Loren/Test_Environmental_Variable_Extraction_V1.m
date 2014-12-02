@@ -1,7 +1,17 @@
 %Enter file contents here
 % The goal of this code is to help automatically extract the environmental
-% variables from the master excel folder
+% variables from .csv files in the 'files-for-import-into-masterScript'
+% folder. 
 % Loren and Jin, 2014 November, University of Arizona
+
+% Notes:
+% 1)  Each of the .csv files in 'files-for-import-into-masterScript' is one
+% curve.  This script only uses the .csv files of A/Ci curves
+% 2) There are two parts to this script.  The first part extracts useful
+% environmental information from the .csv files.  The second part runs
+% scripts to fit A/Cc curves (based script in supplemental information from
+% Su et al. 2009 PC&E paper)
+% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 clc 
@@ -23,6 +33,7 @@ end
 
 
 %% PART 1: Automatically extract environmental variables 
+% (from 'files-for-import-into-masterScript' folder
 
 listing = dir(folder); % navigate to where we locate the master excel spreadsheet
 n1=length(listing); %% How many files within this folder
@@ -129,11 +140,11 @@ for i=4:n1 % using the for-loop to automatically search each file
     if str_name(1,1)=='A' % Only applicable for those ACI-curves
         count=count+1;
         
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        % Attention for MAC User  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        
-        fn=[folder '\' str_name]; % in MAC, we use fn=[folder '/' str];
-        
+        if comp == 0
+        fn=[folder '\' str_name]; 
+        elseif comp == 1
+        fn=[folder '/' str]; % in MAC, we use fn=[folder '/' str];
+        end
         
         
         

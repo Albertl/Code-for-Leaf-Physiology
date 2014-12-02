@@ -1,7 +1,17 @@
 %Enter file contents here
 % The goal of this code is to help automatically extract the environmental
-% variables from the master excel folder
+% variables from .csv files in the 'files-for-import-into-masterScript'
+% folder. 
 % Loren and Jin, 2014 November, University of Arizona
+
+% Notes:
+% 1)  Each of the .csv files in 'files-for-import-into-masterScript' is one
+% curve.  This script only uses the .csv files of A/Ci curves
+% 2) There are two parts to this script.  The first part extracts useful
+% environmental information from the .csv files.  The second part runs
+% scripts to fit A/Cc curves (based script in suppon Su et al. 2009 PC&E paper)
+% 
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 clc 
@@ -23,6 +33,7 @@ end
 
 
 %% PART 1: Automatically extract environmental variables 
+% (from 'files-for-import-into-masterScript' folder
 
 listing = dir(folder); % navigate to where we locate the master excel spreadsheet
 n1=length(listing); %% How many files within this folder
