@@ -11,7 +11,15 @@
 % environmental information from the .csv files.  The second part runs
 % scripts to fit A/Cc curves (based script in supplemental information from
 % Su et al. 2009 PC&E paper)
-% 
+% 3) The environmental variable means and standard deviations are saved as
+% a file called 'Env_variable_Master_Sheet'
+% 4) The parameters from A/Cc curve fitting are saved as a file called 
+% 'Physiology_Variable_Master_Sheet.xlsx'
+
+% To do:
+% 1) Select whether using PC or mac (comp = 0 or 1)
+% 2) Select expansion_rate (expansion_rate=1 is default limit, and >1
+% allows for a higher limit)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 clc 
@@ -147,15 +155,12 @@ for i=4:n1 % using the for-loop to automatically search each file
         end
         
         
-        
-        
-        
         [num txt raw]=xlsread(fn); % although it is a csv file, I use xlsread function instead 
-        t=mean(num(num(:,20)>0,20)); % leaf temperature
-        ci=num(num(:,11)>0,11);
+        t=mean(num(num(:,20)>0,20));    % leaf temperature is column 20
+        ci=num(num(:,11)>0,11);         % Ci is column 11
         [ci1 ind]=sort(ci);
         
-        pho=num(num(:,11)>0,9);
+        pho=num(num(:,11)>0,9);         % Photosynthesis is column 9
         pho1=pho(ind);
         
         test=ACC_Parameterization(t, ci1, pho1, expansion_rate);
