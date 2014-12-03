@@ -32,11 +32,11 @@ comp = 1;
 if comp == 0;
     folder='.\files-for-import-into-masterScript'; % Keep in mind: in Mac, we should use     folder='./files-for-import-into-masterScript'
     fn_output='.\Env_Variables_Output\'; % for Mac user, it should be    fn_output='./Env_Variables/';
-    fn_physiogy_output='.\Physiology_Output\'; % for Mac user, it should be  fn_physiogy_output='./Physiology_Output/';
+    fn_physiology_output='.\Physiology_Output\'; % for Mac user, it should be  fn_physiology_output='./Physiology_Output/';
 elseif comp == 1;
     folder='./files-for-import-into-masterScript';
-    fn_output='./Env_Variables/';
-    fn_physiogy_output='./Physiology_Output/';
+    fn_output='./Env_Variables_Output/';
+    fn_physiology_output='./Physiology_Output/';
 end
 
 
@@ -73,7 +73,8 @@ for i=4:n1 % using the for-loop to automatically search each file
             ACI_Data = textscan(fileID, '%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s','delimiter', ',');
             fclose(fileID);
             % Make a cell array for each column of Data, name array like
-            % Licor file, and remove first row in each column (becz. string)
+            % Licor file (optional), and remove first row in each column
+            % (becz. string), and convert to double
             numlength = length(ACI_Data{1})-1; %subtract 1 because header removed in for loop
             numrows = numel(ACI_Data);
             num = zeros(numlength, numrows);
@@ -154,11 +155,17 @@ for i=1:n2
     end
 end
 
-if comp == 0
-xlswrite([fn_output 'Env_Variable_Master_Sheet.xlsx'],Environment_Mat);
+if comp == 0    % Save as .xls on PC
+    xlswrite([fn_output 'Env_Variable_Master_Sheet.xlsx'],Environment_Mat);
 elseif comp == 1
-    % ADD export command for mac.  One possibility: http://www.mathworks.com/matlabcentral/fileexchange/37560-xlwrite---export-data-to-excel-from-matlab-on-mac-win
+    current_dir = pwd;
+    cd(fn_output)
+    Environment_Mat_T = cell2table(Environment_Mat);
+    writetable(Environment_Mat_T,'Env_Variable_Master_Sheet_mac.csv')
+    % For mac export options, see also: http://www.mathworks.com/matlabcentral/fileexchange/37560-xlwrite---export-data-to-excel-from-matlab-on-mac-win
+    % Or http://www.mathworks.com/matlabcentral/fileexchange/38591-xlwrite--generate-xls-x--files-without-excel-on-mac-linux-win
 end
+cd(current_dir)
 clear n1 n2 fn_track Output
 
 save Loren_Environmental_Variable
@@ -168,7 +175,7 @@ save Loren_Environmental_Variable
 
 
 
-%% PART 2: Automatically Photosynthesis Parameterization
+%% PART 2: Automatic Photosynthesis Parameterization
 
 expansion_rate=1; % if equal to 1, the default version of the code; >1, it will generate bigger boundary than the default
 n1=length(listing);
@@ -184,6 +191,27 @@ for i=4:n1 % using the for-loop to automatically search each file
             [num txt raw]=xlsread(fn); % although it is a csv file, I use xlsread function instead
         elseif comp == 1
             fn=[folder '/' str_name]; % in MAC, we use fn=[folder '/' str];
+                        fileID = fopen(fn);
+            
+            ACI_Data = textscan(fileID, '%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s','delimiter', ',');
+            fclose(fileID);
+            % Make a cell array for each column of Data, name array like
+            % Licor file (optional), and remove first row in each column
+            % (becz. string), and convert to double
+            numlength = length(ACI_Data{1})-1; %subtract 1 because header removed in for loop
+            numrows = numel(ACI_Data);
+            num = zeros(numlength, numrows);
+            for idx = 1 : numel(ACI_Data)
+                dat = ACI_Data{idx}';       %// Extract idx'th cell
+                dat = dat';                 % Transpose dat
+                % Make cell array for each column named after column (Optional)
+%                 name = dat{1};            %// Get the name
+%                 st = [name ' = dat;'];    %// Create a cell array of this name in your workspace
+%                 eval(st);
+                dat = dat(2:end);           % Exclude the first row (because string causes problems later)
+                temp = str2double(dat);     % Note that strings become Nan
+                num(:,idx) = temp(:,:);
+            end
         end
         
         t=mean(num(num(:,20)>0,20));    % leaf temperature is column 20
@@ -213,7 +241,7 @@ for i=4:n1 % using the for-loop to automatically search each file
         axis([xmin-0.1*(xmax-xmin) xmax+0.1*(xmax-xmin) ymin-0.1*(ymax-ymin) ymax+0.1*(ymax-ymin)]);
         title(str_name(1:end-4),'fontsize',16);
         
-        saveas(1,[fn_physiogy_output 'Exp_' num2str(expansion_rate) '_' str_name(1:end-4)]);
+        saveas(1,[fn_physiology_output 'Exp_' num2str(expansion_rate) '_' str_name(1:end-4)]);
         close(1);
         
         Va(count,:)=test.va;
@@ -234,7 +262,7 @@ for i=4:n1 % using the for-loop to automatically search each file
         clear t ci pho
         clear num txt raw fn 
     end     
-    clear str str_name
+    clear str str_name dat temp
 end
 
 
@@ -291,7 +319,13 @@ for i=1:n2
     end
 end
 
-
-xlswrite([fn_physiogy_output 'Physiology_Variable_Master_Sheet.xlsx'],Physiology_Output);
+if comp ==0         % Export on PC
+    xlswrite([fn_physiology_output 'Physiology_Variable_Master_Sheet.xlsx'],Physiology_Output);
+elseif comp ==1     % Export on Mac
+    current_dir = pwd;
+    Physiology_Output_mac = cell2table(Physiology_Output);
+    cd(fn_physiology_output)
+    writetable(Physiology_Output_mac,'Physiology_Variable_Master_Sheet_mac_test.csv')
+end
 
 save Loren_Physiology_Variable
