@@ -61,33 +61,9 @@ for i=4:n1 % using the for-loop to automatically search each file
             fn=[folder '\' str_name];
             
             [num txt raw]=xlsread(fn); % although it is a csv file, I use xlsread function instead
-            Output(count,1)=length(num(:,1)); %% the number of observations
             
-            Output(count,2)=num(1,1); %% the starting of observation number
-            Output(count,3)=num(end,1); %% the ending of observation number
-            
-            Output(count,4)=mean(num(num(:,10)>0,10)); %% mean-conductance
-            Output(count,5)=std(num(num(:,10)>0,10)); %% std-conductance
-            
-            Output(count,6)=mean(num(num(:,20)>0,20)); %% mean-Leaf-Temp
-            Output(count,7)=std(num(num(:,20)>0,20)); %% std-Leaf-Temp
-            
-            Output(count,8)=mean(num(num(:,19)>0,19)); %% mean-Air-Temp
-            Output(count,9)=std(num(num(:,19)>0,19)); %% std-Air-Temp
-            
-            Output(count,10)=mean(num(num(:,29)>0,29)); %% mean-PARi
-            Output(count,11)=std(num(num(:,29)>0,29)); %% std-PARi
-            
-            Output(count,12)=mean(num(num(:,13)>0,13)); %% mean-VPDL
-            Output(count,13)=std(num(num(:,13)>0,13)); %% std-VPDL
-            
-            Output(count,14)=mean(num(num(:,27)>0,27)); %% mean-RH_S
-            Output(count,15)=std(num(num(:,27)>0,27)); %% std-RH_S
-            
-            fn_track(count,1)={str_name};
-            
-            % Import and calculate mean and SD process for mac.
-            % For mac, xlsread doesn't work for .csv files, so using a
+        % Import and calculate mean and SD process for mac computer.
+            % For mac, xlsread may not work for .csv files, so using a
             % different method of import
         elseif comp ==1
             
@@ -112,6 +88,7 @@ for i=4:n1 % using the for-loop to automatically search each file
                 temp = str2double(dat);     % Note that strings become Nan
                 num(:,idx) = temp(:,:);
             end
+        end
 
             Output(count,1)=length(num(:,1)); %% the number of observations
             
@@ -137,7 +114,7 @@ for i=4:n1 % using the for-loop to automatically search each file
             Output(count,15)=std(num(num(:,27)>0,27)); %% std-RH_S
             
             fn_track(count,1)={str_name};
-        end
+
         
         clear num txt raw fn ACI_Data dat name st numrows numlength
     end
@@ -204,12 +181,11 @@ for i=4:n1 % using the for-loop to automatically search each file
         
         if comp == 0
             fn=[folder '\' str_name];
+            [num txt raw]=xlsread(fn); % although it is a csv file, I use xlsread function instead
         elseif comp == 1
             fn=[folder '/' str_name]; % in MAC, we use fn=[folder '/' str];
         end
         
-        
-        [num txt raw]=xlsread(fn); % although it is a csv file, I use xlsread function instead 
         t=mean(num(num(:,20)>0,20));    % leaf temperature is column 20
         ci=num(num(:,11)>0,11);         % Ci is column 11
         [ci1 ind]=sort(ci);
