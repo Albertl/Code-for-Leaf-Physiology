@@ -29,8 +29,8 @@ lbJ=Jmax0-60;    % Low boundary of Jmax
 if lbJ<0
 lbJ=0;
 end 
-bound(1,:)=[.0001 lbvc 0  lbJ TPU0-10];
-bound(2,:)=[40 Vcmax0+70 25 Jmax0+70 TPU0+10];
+bound(1,:)=[.0 lbvc 0  lbJ TPU0-10];
+bound(2,:)=[40 Vcmax0+70 20 Jmax0+70 TPU0+10];
  
 sca_var=10^(-20);
 popusize=200;                   %%% Population sizes
