@@ -325,7 +325,7 @@ elseif comp ==1     % Export on Mac
     current_dir = pwd;
     Physiology_Output_mac = cell2table(Physiology_Output);
     cd(fn_physiology_output)
-    writetable(Physiology_Output_mac,'Physiology_Variable_Master_Sheet_mac_test.csv')
+    writetable(Physiology_Output_mac,'Physiology_Variable_Master_Sheet_mac.csv')
 end
 
 save Loren_Physiology_Variable

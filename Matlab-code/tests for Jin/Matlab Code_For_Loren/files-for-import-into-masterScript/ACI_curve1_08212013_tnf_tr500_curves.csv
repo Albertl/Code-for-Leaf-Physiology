@@ -1,4 +1,4 @@
-Obs,HHMMSS,treeNo_,sunOrShade,leafAge,leafNo_,FTime,EBal_,Photo,Cond,Ci,Trmmol,VpdL,CTleaf,Area,BLC_1,StmRat,BLCond,Tair,Tleaf,TBlk,CO2R,CO2S,H2OR,H2OS,RH_R,RH_S,Flow,PARi,PARo,Press,CsMch,HsMch,StableF,BLCslope,BLCoffst,f_parin,f_parout,alphaK,Status,column_for_Exclude_pts
+Obs,HHMMSS,tree_,sun_or_shade,leaf_age,leaf_no,FTime,EBal,Photo,Cond,Ci,Trmmol,VpdL,CTleaf,Area,BLC_1,StmRat,BLCond,Tair,Tleaf,TBlk,CO2R,CO2S,H2OR,H2OS,RH_R,RH_S,Flow,PARi,PARo,Press,CsMch,HsMch,StableF,BLCslope,BLCoffst,f_parin,f_parout,alphaK,Status,column_for_Exclude_pts
 63,12:25:32,500,sun,young,1,9774.5,0,-0.589,0.0139,163,0.338,2.35,30.41,6,1.42,1,2.84,29.65,30.41,29.55,99.2,100.03,19.833,20.329,46.99,48.17,400,2000,3,98.95,5.81,0.208,0.5,-0.22,2.74,1,0,0.16,111115,OK
 64,12:27:31,500,sun,young,1,9893.5,0,-0.575,0.0135,116,0.332,2.36,30.44,6,1.42,1,2.84,29.65,30.44,29.55,50.57,51.41,19.799,20.287,46.92,48.07,399.9,2000,3,98.96,5.85,0.205,1,-0.22,2.74,1,0,0.16,111135,OK
 65,12:29:08,500,sun,young,1,9990,0,-0.372,0.0138,139,0.338,2.36,30.42,6,1.42,1,2.84,29.65,30.42,29.55,99.91,100.42,19.766,20.263,46.85,48.03,400.2,2000,3,98.96,5.76,0.202,1,-0.22,2.74,1,0,0.16,111135,OK
