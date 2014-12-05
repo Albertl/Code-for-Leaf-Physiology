@@ -180,7 +180,7 @@ save Loren_Environmental_Variable
 expansion_rate=1; % if equal to 1, the default version of the code; >1, it will generate bigger boundary than the default
 n1=length(listing);
 count=0;
-for i=4:n1 % using the for-loop to automatically search each file
+for i=4:n1 % using the for-loop to automatically search each file.  Start at first curve file
     str=listing(i,1); % extracting the file name for each file
     str_name=str.name;
     if str_name(1,1)=='A' % Only applicable for those ACI-curves
