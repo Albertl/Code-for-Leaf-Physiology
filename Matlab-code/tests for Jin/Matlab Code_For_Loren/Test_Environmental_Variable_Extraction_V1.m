@@ -221,6 +221,10 @@ for i=4:n1 % using the for-loop to automatically search each file.  Start at fir
         pho=num(num(:,11)>0,9);         % Photosynthesis is column 9
         pho1=pho(ind);
         
+        pressure=num(:,31);
+        ci1=ci1*mean(pressure(pressure>0))./1000.0;          % Added conversion from ppm to Pa
+        clear pressure;
+        
         test=ACC_Parameterization(t, ci1, pho1, expansion_rate);
         [A R2 RMSE]=Photo_Predic(test.va, t, ci1, pho1);
         
@@ -233,8 +237,8 @@ for i=4:n1 % using the for-loop to automatically search each file.  Start at fir
         xlabel('Ci','fontsize',16);
         ylabel('An','fontsize',16);
         set(gca,'fontsize',14);
-        xmin=min(ci);
-        xmax=max(ci);
+        xmin=min(ci1);
+        xmax=max(ci1);
         
         ymin=min(pho);
         ymax=max(pho);

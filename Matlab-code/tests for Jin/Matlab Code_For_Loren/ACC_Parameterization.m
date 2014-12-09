@@ -19,7 +19,7 @@ function test=ACC_Parameterization(t, ci, pho, expansion_rate)
 
 Vcmax0=Vcmax0*expansion_rate;
 Jmax0=Jmax0*expansion_rate;
-TPU0=Jmax0*expansion_rate;
+TPU0=TPU0*expansion_rate;
 
 lbvc=Vcmax0-50;   % Low boundary of Vcmax
 if lbvc<0
@@ -29,8 +29,8 @@ lbJ=Jmax0-60;    % Low boundary of Jmax
 if lbJ<0
 lbJ=0;
 end 
-bound(1,:)=[.0001 lbvc 0  lbJ TPU0-10];
-bound(2,:)=[40 Vcmax0+70 25 Jmax0+70 TPU0+10];
+bound(1,:)=[.0001 lbvc 0  lbJ max(TPU0-10,0)];
+bound(2,:)=[30 Vcmax0+70 10 Jmax0+100 TPU0+10];
  
 sca_var=10^(-20);
 popusize=200;                   %%% Population sizes
