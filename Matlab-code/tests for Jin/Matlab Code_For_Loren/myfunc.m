@@ -3,7 +3,7 @@
 function [f,error]=myfunc(parameter,  t, ci, pho)
 R=8.314; 
 O=21;
-T0=273.15
+T0=273.15;
 
 %global t                 % leaf temperature in oC
 %global pho               % Observed photosynthesis rate 

@@ -21,7 +21,11 @@ Vcmax0=Vcmax0*expansion_rate;
 Jmax0=Jmax0*expansion_rate;
 TPU0=TPU0*expansion_rate;
 
-lbvc=Vcmax0-50;   % Low boundary of Vcmax
+if Vcmax0<0
+    Vcmax0 = 0.8*Jmax0; %To prevent the lower boundary from being negative.
+end
+
+lbvc=Vcmax0-70;   % Low boundary of Vcmax
 if lbvc<0
 lbvc=0;
 end 
@@ -29,8 +33,8 @@ lbJ=Jmax0-60;    % Low boundary of Jmax
 if lbJ<0
 lbJ=0;
 end 
-bound(1,:)=[.0001 lbvc 0  lbJ max(TPU0-10,0)];
-bound(2,:)=[30 Vcmax0+70 10 Jmax0+100 TPU0+10];
+bound(1,:)=[.0001 lbvc 0  lbJ max(TPU0-5,0)];
+bound(2,:)=[30 Vcmax0+70 10 Jmax0+70 TPU0+5];
  
 sca_var=10^(-20);
 popusize=200;                   %%% Population sizes
