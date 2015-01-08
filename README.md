@@ -71,3 +71,6 @@ bound(2,:)=[30 Vcmax0+70 20 Jmax0+70 TPU0+10];
 sca_var=10^(-20);
 
 popusize=200;
+
+After I forked a copy from github, we did not re-merge copies, but we coordinated changes in our respective scripts (at least up
+until Dec 11th or so.  Jin was tinkering with the boundaries of the search 'area' for the genetic algorithm).
