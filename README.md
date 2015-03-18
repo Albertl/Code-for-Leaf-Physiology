@@ -5,17 +5,23 @@ The goals for this code include:
 (1) Automatically extract environmental variables for each ACI curve
 (2) Run the batch analysis for extracting key physiological parameters
 
-%%%Folder: Matlab-code%%%
--->subfolder: tests for Jin
-----> subfolder: Matlab Code_For_Loren
+%%%Folder: Matlab Code_For_Loren%%%
+Originally branched from Jin's Github:
+'Code-for-Leaf-Physiology/Matlab-code/tests for Jin/Matlab Code_For_Loren'
 
 Script descriptions:
-Test_Environmental_Variable_Extraction_V1.m
+
+1) Test_Environmental_Variable_Extraction_V1.m
 includes Part 1: automatically extract the environmental variables and Part 2: automatically extract physiological parameter
 This script produces output:
 Environmental variable is saved as ./Env_Variables_Output/
 Physiological variables is saved as ./Physiology_Output/
 The internal model and observed A-CI plot is also saved as ./Physiology_Output/
+
+2) Test_Leaf_Physiology_Master_Sheet_Matching_V1_Main.m
+Is for matching the 'master curve list' which has leaf age, quality control, and other
+information, with the output of the A/Cc curve fitting.  Currently relies on xlsread so
+needs to be adapted for Mac.
 
 Scripts/functions based on Sun et al. 2009 paper for A-Cc curve fitting using a genetic
 algorithm:
