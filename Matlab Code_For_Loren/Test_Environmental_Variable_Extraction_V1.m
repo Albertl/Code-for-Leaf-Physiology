@@ -222,7 +222,7 @@ for i=4:n1 % using the for-loop to automatically search each file.  Start at fir
         ci=num(num(:,11)>0,11);         % Ci is column 11, this excludes any negative Ci
         [ci1 ind]=sort(ci);
         
-        pho=num(num(:,11)>0,9);         % Photosynthesis is column 9
+        pho=num(num(:,11)>0,9);         % Photosynthesis is column 9, Ci is column 11 (this excludes negative Ci?)
         pho1=pho(ind);
         
         pressure=num(:,31);
@@ -261,6 +261,8 @@ for i=4:n1 % using the for-loop to automatically search each file.  Start at fir
         Output1(count,3)=RMSE;
         Output1(count,4)=length(A);
         Output1(count,5)=t;
+        
+        %A_at_400=find;
         
         clear R2 RMSE A
         clear ci pho test ci1 pho1
@@ -303,7 +305,7 @@ Physiology_Output(1,21)={'TPU_scale'};
 
 n2=length(Output1(:,1));
 
-Physiology_Output(2:n2+1,1)=fn_track;
+Physiology_Output(2:n2+1,1)=fn_track; %Make first column filenames
 
 for i=1:n2
     for j=2:6
