@@ -21,7 +21,8 @@ The internal model and observed A-CI plot is also saved as ./Physiology_Output/
 2) Test_Leaf_Physiology_Master_Sheet_Matching_V1_Main.m
 Is for matching the 'master curve list' which has leaf age, quality control, and other
 information, with the output of the A/Cc curve fitting.  Currently relies on xlsread so
-needs to be adapted for Mac.
+needs to be adapted for Mac.  I later made a mac-friendly script in R for this purpose called
+'matching_physiology_master_sheet.R'
 
 Scripts/functions based on Sun et al. 2009 paper for A-Cc curve fitting using a genetic
 algorithm:
